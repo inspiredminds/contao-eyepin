@@ -1,0 +1,13 @@
+parameters:
+    env(EYEPIN_API_URL): 'https://apiv3.eyepin.com/interface3.php'
+    inspiredminds.contao_eyepin.api_url: '%env(EYEPIN_API_URL)%'
+
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+        bind:
+            $eyepinApiUrl: '%inspiredminds.contao_eyepin.api_url%'
+
+    InspiredMinds\ContaoEyepin\:
+        resource: ../src/
