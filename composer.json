@@ -28,7 +28,8 @@
         "inspiredminds/eyepin-api": "dev-main",
         "symfony/config": "^5.4 || ^6.4",
         "symfony/dependency-injection": "^5.4 || ^6.4",
-        "symfony/http-kernel": "^5.4 || ^6.4"
+        "symfony/http-kernel": "^5.4 || ^6.4",
+        "terminal42/notification_center": "^1.6"
     },
     "autoload": {
         "psr-4": {
@@ -48,6 +49,12 @@
             "php-http/discovery": false,
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "contao-community-alliance/composer-plugin": true
+        }
+    },
+    "repositories": {
+        "inspiredminds/eyepin-api": {
+            "type": "path",
+            "url": "../eyepin-api"
         }
     }
 }

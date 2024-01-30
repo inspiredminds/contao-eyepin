@@ -11,7 +11,7 @@ declare(strict_types=1);
 namespace InspiredMinds\ContaoEyepinGateway\EventListener\DataContainer;
 
 use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
-use InspiredMinds\ContaoEyepinGateway\Eyepin\EyepinApiFactory;
+use InspiredMinds\EyepinApi\EyepinApiFactory;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -36,7 +36,7 @@ class EyepinClientListener
                 $request->request->get('username'),
                 $request->request->get('password'),
             )
-            ->request('getaccountinfo')
+            ->getAccountInfo()
         ;
 
         return $value;
