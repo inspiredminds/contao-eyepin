@@ -1,9 +1,9 @@
 {
-    "name": "inspiredminds/contao-eyepin",
+    "name": "inspiredminds/contao-eyepin-gateway",
     "description": "Contao integration for eyepin subscriptions.",
     "type": "contao-bundle",
     "license": "LGPL-3.0-or-later",
-    "homepage": "https://github.com/inspiredminds/contao-eyepin",
+    "homepage": "https://github.com/inspiredminds/contao-eyepin-gateway",
     "authors": [
         {
             "name": "Fritz Michael Gschwantner",
@@ -12,8 +12,8 @@
         }
     ],
     "support": {
-        "issues": "https://github.com/inspiredminds/contao-eyepin/issues",
-        "source": "https://github.com/inspiredminds/contao-eyepin",
+        "issues": "https://github.com/inspiredminds/contao-eyepin-gateway/issues",
+        "source": "https://github.com/inspiredminds/contao-eyepin-gateway",
         "forum": "https://community.contao.org/de"
     },
     "funding": [
@@ -25,19 +25,18 @@
     "require": {
         "php": ">=8.2",
         "contao/core-bundle": "^4.13 || ^5.0",
+        "inspiredminds/eyepin-api": "dev-main",
         "symfony/config": "^5.4 || ^6.4",
         "symfony/dependency-injection": "^5.4 || ^6.4",
-        "symfony/http-kernel": "^5.4 || ^6.4",
-        "symfony/http-client-contracts": "^3.4",
-        "symfony/http-client": "^5.4 || ^6.4"
+        "symfony/http-kernel": "^5.4 || ^6.4"
     },
     "autoload": {
         "psr-4": {
-            "InspiredMinds\\ContaoEyepin\\": "src/"
+            "InspiredMinds\\ContaoEyepinGateway\\": "src/"
         }
     },
     "extra": {
-        "contao-manager-plugin": "InspiredMinds\\ContaoEyepin\\ContaoManager\\Plugin"
+        "contao-manager-plugin": "InspiredMinds\\ContaoEyepinGateway\\ContaoManager\\Plugin"
     },
     "require-dev": {
         "contao/easy-coding-standard": "^6.0",

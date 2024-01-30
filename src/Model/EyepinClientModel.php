@@ -8,7 +8,7 @@ declare(strict_types=1);
  * (c) INSPIRED MINDS
  */
 
-namespace InspiredMinds\ContaoEyepin\Model;
+namespace InspiredMinds\ContaoEyepinGateway\Model;
 
 use Contao\Model;
 

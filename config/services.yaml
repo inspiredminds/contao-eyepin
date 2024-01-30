@@ -9,5 +9,5 @@ services:
         bind:
             $eyepinApiUrl: '%inspiredminds.contao_eyepin.api_url%'
 
-    InspiredMinds\ContaoEyepin\:
+    InspiredMinds\ContaoEyepinGateway\:
         resource: ../src/

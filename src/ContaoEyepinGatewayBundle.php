@@ -8,11 +8,11 @@ declare(strict_types=1);
  * (c) INSPIRED MINDS
  */
 
-namespace InspiredMinds\ContaoEyepin;
+namespace InspiredMinds\ContaoEyepinGateway;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class ContaoEyepinBundle extends Bundle
+class ContaoEyepinGatewayBundle extends Bundle
 {
     public function getPath(): string
     {

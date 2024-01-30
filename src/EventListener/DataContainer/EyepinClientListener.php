@@ -8,10 +8,10 @@ declare(strict_types=1);
  * (c) INSPIRED MINDS
  */
 
-namespace InspiredMinds\ContaoEyepin\EventListener\DataContainer;
+namespace InspiredMinds\ContaoEyepinGateway\EventListener\DataContainer;
 
 use Contao\CoreBundle\DependencyInjection\Attribute\AsCallback;
-use InspiredMinds\ContaoEyepin\Eyepin\EyepinApiFactory;
+use InspiredMinds\ContaoEyepinGateway\Eyepin\EyepinApiFactory;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**

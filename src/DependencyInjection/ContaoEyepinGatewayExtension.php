@@ -8,14 +8,14 @@ declare(strict_types=1);
  * (c) INSPIRED MINDS
  */
 
-namespace InspiredMinds\ContaoEyepin\DependencyInjection;
+namespace InspiredMinds\ContaoEyepinGateway\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-class ContaoEyepinExtension extends Extension
+class ContaoEyepinGatewayExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {

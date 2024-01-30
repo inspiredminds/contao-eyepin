@@ -21,7 +21,7 @@ return static function (ECSConfig $ecsConfig): void {
     ]);
 
     $ecsConfig->ruleWithConfiguration(HeaderCommentFixer::class, [
-        'header' => "This file is part of the Contao Eyepin extension.\n\n(c) INSPIRED MINDS",
+        'header' => "This file is part of the Contao eyepin Gateway extension.\n\n(c) INSPIRED MINDS",
     ]);
 
     $ecsConfig->parallel();
