@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Contao Eyepin extension.
+ * This file is part of the Contao eyepin Gateway extension.
  *
  * (c) INSPIRED MINDS
  */
@@ -15,9 +15,9 @@ use InspiredMinds\EyepinApi\EyepinApiFactory;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * Callbacks for tl_eyepin_client.
+ * Callbacks for tl_nc_gateway.
  */
-class EyepinClientListener
+class GatewayListener
 {
     public function __construct(
         private readonly RequestStack $requestStack,
@@ -25,7 +25,7 @@ class EyepinClientListener
     ) {
     }
 
-    #[AsCallback('tl_eyepin_client', 'fields.password.save')]
+    #[AsCallback('tl_nc_gateway', 'fields.eyepinPassword.save')]
     public function onPasswordSave(mixed $value): mixed
     {
         $request = $this->requestStack->getCurrentRequest();
@@ -33,8 +33,8 @@ class EyepinClientListener
         // Check credentials
         $this->eyepinApiFactory
             ->createForCredentials(
-                $request->request->get('username'),
-                $request->request->get('password'),
+                $request->request->get('eyepinUsername'),
+                $request->request->get('eyepinPassword'),
             )
             ->getAccountInfo()
         ;

@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the Contao Eyepin extension.
+ * This file is part of the Contao eyepin Gateway extension.
  *
  * (c) INSPIRED MINDS
  */

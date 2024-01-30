@@ -24,8 +24,10 @@
     ],
     "require": {
         "php": ">=8.2",
+        "codefog/contao-haste": "^5.1",
         "contao/core-bundle": "^4.13 || ^5.0",
-        "inspiredminds/eyepin-api": "dev-main",
+        "doctrine/dbal": "^3.0",
+        "inspiredminds/eyepin-api": "^1.0",
         "symfony/config": "^5.4 || ^6.4",
         "symfony/dependency-injection": "^5.4 || ^6.4",
         "symfony/http-kernel": "^5.4 || ^6.4",
@@ -44,17 +46,12 @@
         "contao/rector": "^1.0"
     },
     "config": {
+        "sort-packages": true,
         "allow-plugins": {
             "contao-components/installer": true,
             "php-http/discovery": false,
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "contao-community-alliance/composer-plugin": true
-        }
-    },
-    "repositories": {
-        "inspiredminds/eyepin-api": {
-            "type": "path",
-            "url": "../eyepin-api"
         }
     }
 }
