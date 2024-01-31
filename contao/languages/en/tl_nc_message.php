@@ -9,7 +9,7 @@ declare(strict_types=1);
  */
 
 $GLOBALS['TL_LANG']['tl_nc_message']['expression_legend'] = 'Condition';
-$GLOBALS['TL_LANG']['tl_nc_message']['eyepinExpression'] = ['Condition', 'Optional condition for this message to be sent (available variables: form_*, language, request, page).'];
+$GLOBALS['TL_LANG']['tl_nc_message']['eyepinExpression'] = ['Condition', 'Optional condition for this message to be sent. Available variables are: form_*, language, request, page. Available functions are in_array and explode.'];
 $GLOBALS['TL_LANG']['tl_nc_message']['eyepin_legend'] = 'eyepin API request settings';
 $GLOBALS['TL_LANG']['tl_nc_message']['eyepinAction'] = ['Action', 'eyepin API action to be taken.'];
 $GLOBALS['TL_LANG']['tl_nc_message']['eyepinActionOptions'] = [

@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace InspiredMinds\ContaoEyepinGateway\Gateway;
 
 use Codefog\HasteBundle\StringParser;
-use Contao\CoreBundle\String\SimpleTokenExpressionLanguage;
 use Contao\StringUtil;
 use Contao\System;
 use Contao\Validator;
@@ -25,6 +24,7 @@ use NotificationCenter\Gateway\GatewayInterface;
 use NotificationCenter\Model\Gateway;
 use NotificationCenter\Model\Message;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\ExpressionLanguage\ExpressionFunction;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -49,7 +49,9 @@ class EyepinGateway extends Base implements GatewayInterface
         }
 
         $this->stringParser = new StringParser();
-        $this->expressionLanguage = new SimpleTokenExpressionLanguage();
+        $this->expressionLanguage = new ExpressionLanguage();
+        $this->expressionLanguage->addFunction(ExpressionFunction::fromPhp('in_array'));
+        $this->expressionLanguage->addFunction(ExpressionFunction::fromPhp('explode'));
     }
 
     public function send(Message $message, array $tokens, $language = ''): bool
@@ -60,8 +62,11 @@ class EyepinGateway extends Base implements GatewayInterface
 
         try {
             if (!$this->matchExpression($message, $tokens, $language)) {
+                dd('not matched');
                 return true;
             }
+
+            dd('matched');
 
             match ($message->eyepinAction) {
                 'createAddress' => $this->createAddress($message, $tokens),
