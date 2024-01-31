@@ -62,11 +62,8 @@ class EyepinGateway extends Base implements GatewayInterface
 
         try {
             if (!$this->matchExpression($message, $tokens, $language)) {
-                dd('not matched');
                 return true;
             }
-
-            dd('matched');
 
             match ($message->eyepinAction) {
                 'createAddress' => $this->createAddress($message, $tokens),
