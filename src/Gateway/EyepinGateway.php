@@ -26,6 +26,7 @@ use NotificationCenter\Model\Message;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\ExpressionLanguage\ExpressionFunction;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+use Symfony\Component\ExpressionLanguage\SyntaxError;
 use Symfony\Component\HttpKernel\Kernel;
 
 class EyepinGateway extends Base implements GatewayInterface
@@ -101,13 +102,21 @@ class EyepinGateway extends Base implements GatewayInterface
         $addressInsertRequest->setData($fields);
         $addressInsertRequest->email = $email;
 
+        $logMessage = sprintf('eyepin: created/updated "%s"', $email);
+
         if ($listIds = StringUtil::deserialize($message->eyepinLists, true)) {
             foreach ($listIds as $listId) {
                 $addressInsertRequest->lists[] = new AddressList((int) $listId);
             }
+
+            $logMessage .= sprintf(' and added to lists %s', implode(', ', $listIds));
         }
 
         $this->api->createUpdateAddress($addressInsertRequest);
+
+        /** @var LoggerInterface $contaoLogger */
+        $contaoLogger = System::getContainer()->get('monolog.logger.contao.general');
+        $contaoLogger->info($logMessage);
     }
 
     private function addToLists(Message $message, array $tokens): void
@@ -118,9 +127,15 @@ class EyepinGateway extends Base implements GatewayInterface
             throw new \InvalidArgumentException('Invalid email address given.');
         }
 
-        foreach (StringUtil::deserialize($message->eyepinLists, true) as $listId) {
-            $request = new AddressListAddRequest(id: (int) $listId, addresses: [$email]);
-            $this->api->addToList($request);
+        if ($listIds = StringUtil::deserialize($message->eyepinLists, true)) {
+            foreach ($listIds as $listId) {
+                $request = new AddressListAddRequest(id: (int) $listId, addresses: [$email]);
+                $this->api->addToList($request);
+            }
+
+            /** @var LoggerInterface $contaoLogger */
+            $contaoLogger = System::getContainer()->get('monolog.logger.contao.general');
+            $contaoLogger->info(sprintf('eyepin: added "%s" to lists %s', $email, implode(', ', $listIds)));
         }
     }
 
@@ -150,6 +165,10 @@ class EyepinGateway extends Base implements GatewayInterface
             'page' => $GLOBALS['objPage'] ?? null,
         ];
 
-        return (bool) $this->expressionLanguage->evaluate($expression, $data);
+        try {
+            return (bool) $this->expressionLanguage->evaluate($expression, $data);
+        } catch (SyntaxError) {
+            return false;
+        }
     }
 }
