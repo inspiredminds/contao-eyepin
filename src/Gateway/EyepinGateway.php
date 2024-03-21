@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace InspiredMinds\ContaoEyepinGateway\Gateway;
 
-use Codefog\HasteBundle\StringParser;
 use Contao\StringUtil;
 use Contao\System;
 use Contao\Validator;
@@ -35,8 +34,6 @@ class EyepinGateway extends Base implements GatewayInterface
 
     private readonly EyepinApi $api;
 
-    private readonly StringParser $stringParser;
-
     private readonly ExpressionLanguage $expressionLanguage;
 
     public function __construct(Gateway $model)
@@ -49,7 +46,6 @@ class EyepinGateway extends Base implements GatewayInterface
             $this->api = $eyepinApiFactory->createForCredentials($model->eyepinUsername, $model->eyepinPassword);
         }
 
-        $this->stringParser = new StringParser();
         $this->expressionLanguage = new ExpressionLanguage();
         $this->expressionLanguage->addFunction(ExpressionFunction::fromPhp('in_array'));
         $this->expressionLanguage->addFunction(ExpressionFunction::fromPhp('explode'));
@@ -89,7 +85,7 @@ class EyepinGateway extends Base implements GatewayInterface
 
     private function createAddress(Message $message, array $tokens): void
     {
-        $email = $this->stringParser->recursiveReplaceTokensAndTags((string) $message->eyepinEmail, $tokens);
+        $email = $this->recursiveReplaceTokensAndTags((string) $message->eyepinEmail, $tokens);
 
         if (!$email || !Validator::isEmail($email)) {
             throw new \InvalidArgumentException('Invalid email address given.');
@@ -121,7 +117,7 @@ class EyepinGateway extends Base implements GatewayInterface
 
     private function addToLists(Message $message, array $tokens): void
     {
-        $email = $this->stringParser->recursiveReplaceTokensAndTags((string) $message->eyepinEmail, $tokens);
+        $email = $this->recursiveReplaceTokensAndTags((string) $message->eyepinEmail, $tokens);
 
         if (!$email || !Validator::isEmail($email)) {
             throw new \InvalidArgumentException('Invalid email address given.');
@@ -145,8 +141,8 @@ class EyepinGateway extends Base implements GatewayInterface
         $processedParams = [];
 
         foreach ($messageParams as $param) {
-            $key = $this->stringParser->recursiveReplaceTokensAndTags((string) $param['key'], $tokens);
-            $value = $this->stringParser->recursiveReplaceTokensAndTags((string) $param['value'], $tokens);
+            $key = $this->recursiveReplaceTokensAndTags((string) $param['key'], $tokens);
+            $value = $this->recursiveReplaceTokensAndTags((string) $param['value'], $tokens);
             $processedParams[$key] = $value;
         }
 

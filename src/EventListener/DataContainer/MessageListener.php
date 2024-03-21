@@ -28,7 +28,7 @@ class MessageListener
     #[AsCallback('tl_nc_message', 'fields.eyepinLists.options')]
     public function onListIdOptions(DataContainer $dc): array
     {
-        if (!$gateway = Gateway::findByPk($dc->activeRecord->gateway)) {
+        if (!$gateway = Gateway::findById($dc->activeRecord->gateway)) {
             return [];
         }
 
